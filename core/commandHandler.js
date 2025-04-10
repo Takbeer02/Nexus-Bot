@@ -158,6 +158,39 @@ function initializeCommandWatcher() {
 }
 
 async function handleCommand(api, event) {
+  // Initialize global client if not exists
+  if (!global.client) global.client = {};
+  if (!global.client.handleReply) global.client.handleReply = [];
+
+  // FIRST check if this is a reply to a message
+  if (event.messageReply) {
+    console.log("Got message reply:", {
+      messageID: event.messageID,
+      replyTo: event.messageReply.messageID
+    });
+
+    // Find matching reply handler
+    const handler = global.client.handleReply.find(
+      h => h.messageID === event.messageReply.messageID
+    );
+
+    if (handler) {
+      console.log("Found handler:", handler);
+      try {
+        const command = commands.get(handler.name);
+        if (command && typeof command.handleReply === "function") {
+          await command.handleReply({ api, event, handleReply: handler });
+          return; // Stop processing after handling reply
+        }
+      } catch (error) {
+        console.error("Error in reply handler:", error);
+        api.sendMessage("❌ Error processing reply", event.threadID);
+        return;
+      }
+    }
+  }
+
+  // Continue with normal command processing
   const { body, senderID, threadID, messageID } = event;
   
   // Get thread-specific prefix if available
@@ -186,6 +219,29 @@ async function handleCommand(api, event) {
   
   const args = messageContent.split(/ +/);
   const commandName = args.shift().toLowerCase();
+
+  // Handle message replies FIRST, before any other command processing
+  if (event.type === "message_reply" && global.client?.handleReply) {
+    const handleReply = global.client.handleReply.find(
+      r => r.messageID === event.messageReply.messageID
+    );
+    
+    if (handleReply) {
+      try {
+        const command = commands.get(handleReply.name);
+        if (command && typeof command.handleReply === "function") {
+          await command.handleReply({ api, event, handleReply });
+          return; // Important: return after handling reply
+        }
+      } catch (error) {
+        logger.error("Error in handleReply:", error);
+        api.sendMessage("❌ Error handling reply", event.threadID);
+        return;
+      }
+    }
+  }
+
+  // Only continue with normal command processing if it wasn't a reply
 
   // Check if command exists (including aliases)
   let command = commands.get(commandName);
@@ -276,6 +332,25 @@ async function handleCommand(api, event) {
       senderID,
       senderID // You can replace this with actual user name if available
     );
+  }
+
+  // Handle message reactions
+  if (event.type === "message_reaction" && global.client?.handleReaction) {
+    const handleReaction = global.client.handleReaction.find(
+      h => h.messageID === event.messageID
+    );
+    
+    if (handleReaction) {
+      try {
+        const command = commands.get(handleReaction.name);
+        if (command && typeof command.handleReaction === "function") {
+          await command.handleReaction({ api, event, handleReaction });
+        }
+      } catch (error) {
+        logger.error("Error in handleReaction:", error);
+      }
+      return;
+    }
   }
 
   // Execute command with the actual prefix used

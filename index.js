@@ -133,6 +133,18 @@ async function initBot() {
     global.messageRateLimit = new Map();
     global.commandCooldowns = new Map();
 
+    // Initialize global handlers
+    global.client = {
+      commands: new Map(),
+      events: new Map(),
+      cooldowns: new Map(),
+      eventRegistered: {},
+      handleReply: [],
+      handleReaction: [],
+      handleSchedule: [],
+      messageQueue: [],
+    };
+
     // Only after safety systems are ready, load remaining components
     const loadingInterval = setInterval(() => {
       displayLoadingAnimation('Initializing Nexus Bot...');

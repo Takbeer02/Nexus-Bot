@@ -1,5 +1,5 @@
 /node_modules
 /logs
 /database
-/appstate.json
+appstate.json
 /temp
