@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 
 // Initialize custom keywords map if not already done
 if (!global.customKeywords) {

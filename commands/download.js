@@ -1,4 +1,4 @@
-const StreamHandler = require('../modules/streamHandler');
+const streamHandler = require('../nexus-core/streamHandler');
 const path = require('path');
 const fs = require('fs');
 
@@ -15,7 +15,7 @@ module.exports = {
         guide: "{prefix}download [url]"
     },
 
-    async execute({ api, event, args }) {
+    run: async function({ api, event, args }) {
         const { threadID, messageID } = event;
         if (!args[0]) {
             return api.sendMessage("Please provide a URL to download!", threadID, messageID);
@@ -25,7 +25,7 @@ module.exports = {
         
         try {
             // First check file info
-            const fileInfo = await StreamHandler.getFileInfo(url);
+            const fileInfo = await streamHandler.getFileInfo(url);
             
             // Check file size (max 25MB)
             if (fileInfo.size > 25 * 1024 * 1024) {
@@ -38,13 +38,13 @@ module.exports = {
                 fs.mkdirSync(tempDir);
             }
             
-            const tempPath = path.join(tempDir, `${StreamHandler.randomString(8)}.${fileInfo.extension}`);
+            const tempPath = path.join(tempDir, `${streamHandler.randomString(8)}.${fileInfo.extension}`);
 
             // Send downloading message
             api.sendMessage("⏳ Downloading file...", threadID, messageID);
 
             // Download file
-            await StreamHandler.downloadFile(url, tempPath);
+            await streamHandler.downloadFile(url, tempPath);
 
             // Send file
             await api.sendMessage(

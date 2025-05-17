@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 
 module.exports = {
   config: {

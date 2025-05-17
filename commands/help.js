@@ -18,105 +18,29 @@ module.exports = {
   execute: async function({ api, event, args, commands, prefix }) {
     try {
       const { threadID } = event;
-      const commandName = args[0]?.toLowerCase();
       
-      // Get permission level of user
-      let permissionLevel = 0;
-      try {
-        if (global.permissionManager) {
-          permissionLevel = await global.permissionManager.getUserRole(event.senderID);
-        }
-      } catch (err) {
-        console.error("Error getting user permission:", err);
+      if (args[0]) {
+        // Show detailed help for a specific command
+        const cmd = [...commands.values()].find(c => c.config.name === args[0] || (c.config.aliases && c.config.aliases.includes(args[0])));
+        if (!cmd) return api.sendMessage('❌ Command not found.', event.threadID);
+        const c = cmd.config;
+        return api.sendMessage(`ℹ️ ${c.name}\n${c.longDescription || c.shortDescription}\nUsage: ${c.guide.replace(/{prefix}/g, prefix)}`, event.threadID);
       }
       
-      // Show details of a specific command
-      if (commandName) {
-        const command = commands.get(commandName);
-        
-        if (!command) {
-          return api.sendMessage(`❌ Command "${commandName}" not found.\nUse "${prefix}help" to see all available commands.`, threadID);
-        }
-        
-        // Role permission texts
-        const roleText = {
-          0: "👥 Everyone",
-          1: "👑 Group Admin",
-          2: "⚙️ Bot Admin",
-          3: "⚡ Bot Owner"
-        };
-        
-        // Format command details with fallbacks for undefined values
-        const details = `╭─────༺ ❯❯❯ ༻─────╮\n` +
-                        `   📝 Command: ${command.config.name}\n` +
-                        `╰─────༺ ❮❮❮ ༻─────╯\n\n` +
-                        `📋 Description: ${command.config.shortDescription || command.config.longDescription || "No description available"}\n` +
-                        `🔧 Usage: ${command.config.guide?.replace(/{prefix}/g, prefix) || `${prefix}${command.config.name}`}\n` +
-                        `📁 Category: ${command.config.category || "Uncategorized"}\n` +
-                        `🔒 Permission: ${roleText[command.config.role] || roleText[0]}\n` +
-                        (command.config.aliases?.length > 0 ? `🔄 Aliases: ${command.config.aliases.join(", ")}\n` : "") +
-                        (command.config.countDown > 0 ? `⏳ Cooldown: ${command.config.countDown} seconds\n` : "");
-        
-        return api.sendMessage(details, threadID);
-      }
-
-      if (commandName === "update") {
-        // Add detailed help for update command
-        const updateUsageDetails = `
-╭─────༺ Update Command ༻─────╮
-
-📋 Usage:
-  ${prefix}update [check/install/force]
-  ${prefix}update from [owner] [repo]
-
-🔍 Examples:
-  ${prefix}update - Check for updates
-  ${prefix}update force - Force update 
-  ${prefix}update from Nexus-016 Nexus-Bot - Update from specific repo
-
-💡 Tips:
-  - Make sure your repo is valid
-  - Create releases on GitHub for best experience
-  - Use 'force' with caution
-╰───────────────────────────╯`;
-
-        return api.sendMessage(updateUsageDetails, threadID);
+      // Group commands by category
+      const cats = {};
+      for (const cmd of commands.values()) {
+        const cat = cmd.config.category || 'other';
+        if (!cats[cat]) cats[cat] = [];
+        cats[cat].push(cmd.config.name);
       }
       
-      // Display command categories
-      const categories = new Map();
-      
-      commands.forEach(cmd => {
-        if (cmd.config.role > permissionLevel) return; // Skip commands the user doesn't have permission for
-        
-        const category = cmd.config.category?.toLowerCase() || "uncategorized";
-        
-        if (!categories.has(category)) {
-          categories.set(category, []);
-        }
-        
-        categories.get(category).push(cmd.config.name);
-      });
-      
-      let msg = `╭───⋐ 📚 Command List ⋑───╮\n` + 
-                `│ Use ${prefix}help <cmd> for details\n` +
-                `╰─────────────────────╯\n\n`;
-      
-      // Sort categories and commands alphabetically
-      const sortedCategories = Array.from(categories.keys()).sort();
-      
-      sortedCategories.forEach(category => {
-        const emoji = getCategoryEmoji(category);
-        const commands = categories.get(category).sort();
-        
-        msg += `${emoji} ${capitalizeFirstLetter(category)} (${commands.length}):\n`;
-        msg += commands.map(cmd => `  ➜ ${prefix}${cmd}`).join("\n");
-        msg += "\n\n";
-      });
-      
-      msg += `⚠️ You can see ${commands.size - getCommandsForPermissionLevel(commands, permissionLevel)} more commands with higher permissions`;
-      
-      return api.sendMessage(msg, threadID);
+      let msg = '📖 Command List:\n';
+      for (const [cat, cmds] of Object.entries(cats)) {
+        msg += `\n[${cat}]\n- ${cmds.join(', ')}\n`;
+      }
+      msg += `\nType ${prefix}help [command] for details.`;
+      api.sendMessage(msg, event.threadID);
     } catch (error) {
       console.error("Help command error:", error);
       return api.sendMessage("❌ An error occurred while processing the help command.", event.threadID);

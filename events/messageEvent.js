@@ -1,6 +1,7 @@
-const logger = require('../utils/logger');
-const safeApi = require('../utils/apiHelpers');
-const dbManager = require('../modules/dbManager');
+const logger = require('../nexus-core/logger');
+const safeApi = require('../nexus-core/apiHelpers');
+const dbManager = require('../nexus-core/dbManager');
+const { ensureDbEntities } = require('../nexus-core/dbSync');
 
 /**
  * MessageEvent - Handles message events with optimized typing indicators
@@ -19,6 +20,9 @@ module.exports = {
       return;
     }
 
+    // Ensure user and thread exist in the database
+    await ensureDbEntities(api, event);
+
     // Initialize global message count if not exists
     if (typeof global.messageCount === 'undefined') {
       global.messageCount = 0;
@@ -28,9 +32,6 @@ module.exports = {
     global.messageCount++;
     
     try {
-      // Auto-add user and thread to database
-      await syncDatabaseEntities(api, event);
-      
       // Get messaging configuration with defaults
       const messagingConfig = {
         autoRead: true,
@@ -86,81 +87,6 @@ module.exports = {
     }
   }
 };
-
-/**
- * Sync sender and thread to database
- * @param {Object} api - Facebook API
- * @param {Object} event - Message event
- */
-async function syncDatabaseEntities(api, event) {
-  try {
-    const { senderID, threadID } = event;
-    
-    // Skip database sync if we don't have a valid sender or thread
-    if (!senderID || !threadID) return;
-    
-    // Skip if the sender is the bot itself
-    const botID = api.getCurrentUserID();
-    if (senderID === botID) return;
-
-    // Add user to database if not exists
-    try {
-      const userExists = await dbManager.getUser(senderID);
-      
-      if (!userExists) {
-        // Get user name
-        const userInfo = await new Promise((resolve, reject) => {
-          api.getUserInfo(senderID, (err, info) => {
-            if (err) reject(err);
-            else resolve(info);
-          });
-        });
-        
-        const userName = userInfo[senderID]?.name || "Unknown User";
-        
-        // Create user in database
-        await dbManager.createUser(senderID, userName);
-        logger.debug(`Added new user to database: ${userName} (${senderID})`);
-      }
-    } catch (userError) {
-      logger.debug(`Error syncing user to database: ${userError.message}`);
-    }
-    
-    // Add thread to database if not exists
-    try {
-      const threadExists = await dbManager.getGroup(threadID);
-      
-      if (!threadExists) {
-        // Get thread info
-        const threadInfo = await new Promise((resolve, reject) => {
-          api.getThreadInfo(threadID, (err, info) => {
-            if (err) reject(err);
-            else resolve(info);
-          });
-        });
-        
-        const threadName = threadInfo.threadName || "Unknown Group";
-        
-        // Create thread in database
-        await dbManager.createGroup(threadID, threadName);
-        logger.debug(`Added new thread to database: ${threadName} (${threadID})`);
-        
-        // Update admin cache for this thread
-        // This will automatically update the permission system with thread admins
-        if (global.permissionManager && threadInfo.isGroup) {
-          setTimeout(() => {
-            global.permissionManager.refreshThreadAdmins(api, threadID)
-              .catch(err => logger.debug(`Error refreshing admins: ${err.message}`));
-          }, 5000);
-        }
-      }
-    } catch (threadError) {
-      logger.debug(`Error syncing thread to database: ${threadError.message}`);
-    }
-  } catch (error) {
-    logger.error(`Database sync error: ${error.message}`);
-  }
-}
 
 /**
  * Handle messages that contain keywords without prefix

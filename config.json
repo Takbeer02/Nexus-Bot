@@ -1,104 +1,103 @@
 {
-  "name": "NexusBot",
-  "version": "1.1.0",
-  "prefix": "!",
-  "language": "en",
-  "timezone": "UTC",
-  "logLevel": "info",
-  "owner": "100036117980682",
-  "admins": [""],
-  
-  "system": {
-    "autoRestart": {
-      "enabled": true,
-      "memoryThreshold": 500,
-      "interval": 21600000,
-      "type": "soft",
-      "refreshConnection": true,
-      "reloadPermissions": true,
-      "clearCache": true,
-      "backupDatabase": false,
-      "timeout": 3000,
-      "autoRestartOnError": true,
-      "maxErrorsBeforeRestart": 5,
-      "errorResetInterval": 3600000
-    },
-    "performance": {
-      "cacheEnabled": true,
-      "cacheTimeout": 300000,
-      "maxConcurrentCommands": 5,
-      "maxCacheSize": 100,
-      "cleanupInterval": 3600000
-    }
+  "botConfig": {
+    "name": "NexusBot",
+    "version": "1.2.0",
+    "prefix": "!",
+    "language": "en",
+    "timezone": "UTC",
+    "logLevel": "info",
+    "owner": "100036117980682",
+    "admins": []
   },
-
-  "behavior": {
-    "typing": {
-      "enabled": true,
-      "minSpeed": 50,
-      "maxSpeed": 100
-    },
-    "activeHours": {
-      "start": 8,
-      "end": 22
-    },
-    "messageHandling": {
-      "enabled": true,
-      "messageRateLimit": {
+  "systemConfig": {
+    "system": {
+      "autoRestart": {
         "enabled": true,
-        "windowMs": 60000,
-        "maxMessages": 10
+        "memoryThreshold": 500,
+        "interval": 21600000,
+        "type": "soft",
+        "refreshConnection": true,
+        "reloadPermissions": true,
+        "clearCache": true,
+        "backupDatabase": false,
+        "timeout": 3000,
+        "autoRestartOnError": true,
+        "maxErrorsBeforeRestart": 5,
+        "errorResetInterval": 3600000
       },
-      "autoRead": true,
-      "typingIndicator": true,
-      "seenIndicator": true,
-      "delay": {
-        "min": 500,
-        "max": 2000
+      "performance": {
+        "cacheEnabled": true,
+        "cacheTimeout": 300000,
+        "maxConcurrentCommands": 5,
+        "maxCacheSize": 100,
+        "cleanupInterval": 3600000
       }
     },
-    "adminNotifications": true
-  },
-
-  "safety": {
-    "enabled": true,
-    "maxDailyMessages": 1000,
-    "messageInterval": {
-      "min": 2000,
-      "max": 5000
+    "behavior": {
+      "typing": {
+        "enabled": true,
+        "minSpeed": 50,
+        "maxSpeed": 100
+      },
+      "activeHours": {
+        "start": 8,
+        "end": 22
+      },
+      "messageHandling": {
+        "enabled": true,
+        "messageRateLimit": {
+          "enabled": true,
+          "windowMs": 60000,
+          "maxMessages": 10
+        },
+        "autoRead": true,
+        "typingIndicator": true,
+        "seenIndicator": true,
+        "delay": {
+          "min": 500,
+          "max": 2000
+        }
+      },
+      "adminNotifications": true
     },
-    "rateLimit": {
+    "safety": {
       "enabled": true,
-      "windowMs": 60000,
-      "max": 10
+      "maxDailyMessages": 1000,
+      "messageInterval": {
+        "min": 2000,
+        "max": 5000
+      },
+      "rateLimit": {
+        "enabled": true,
+        "windowMs": 60000,
+        "max": 10
+      },
+      "moderation": {
+        "enabled": true,
+        "maxWarns": 3,
+        "bannedWords": [],
+        "spamProtection": true,
+        "contentFilter": ["spam", "abuse", "nsfw"]
+      }
     },
-    "moderation": {
-      "enabled": true,
-      "maxWarns": 3,
-      "bannedWords": [],
-      "spamProtection": true,
-      "contentFilter": ["spam", "abuse", "nsfw"]
+    "database": {
+      "backup": {
+        "enabled": true,
+        "interval": 3600000,
+        "retention": 7
+      },
+      "backupPath": "database/backup",
+      "path": "database/data.db"
+    },
+    "github": {
+      "enabled": false,
+      "owner": "Nexus-016",
+      "repo": "Nexus-Bot",
+      "branch": "main",
+      "token": "",
+      "autoSync": false,
+      "syncInterval": 3600000,
+      "backupRetention": 7
     }
-  },
-
-  "database": {
-    "backup": {
-      "enabled": true,
-      "interval": 3600000,
-      "retention": 7
-    },
-    "backupPath": "database/backup",
-    "path": "database/data.db"
-  },
-
-  "github": {
-    "enabled": false,
-    "owner": "Nexus-016",
-    "repo": "Nexus-Bot",
-    "branch": "main",
-    "token": "",
-    "autoSync": false,
-    "syncInterval": 3600000,
-    "backupRetention": 7
   }
 }

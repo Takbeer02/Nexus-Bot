@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 
 // Rate limiting map to prevent spam
 const notificationCooldowns = new Map();

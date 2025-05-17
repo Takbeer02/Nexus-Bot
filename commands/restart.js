@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { exec, spawn } = require('child_process');
-const logger = require('../utils/logger');
-const { loadCommands, notifyAdmin } = require('../core/commandHandler');
-const { loadEvents } = require('../core/eventHandler');
-const auth = require('../modules/auth');
+const logger = require('../nexus-core/logger');
+const { loadCommands, notifyAdmin } = require('../nexus-core/commandHandler');
+const { loadEvents } = require('../nexus-core/eventHandler');
+const auth = require('../nexus-core/auth');
 
 module.exports = {
   config: {
@@ -277,7 +277,7 @@ async function isAdminUser(api, userID) {
   // Fallback to config.json
   try {
     const config = global.config || require('../config.json');
-    return Array.isArray(config.admins) && config.admins.includes(userID);
+    return Array.isArray(config.botConfig?.admins) && config.botConfig.admins.includes(userID);
   } catch (error) {
     logger.error("Error loading config:", error);
     return false;

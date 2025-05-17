@@ -3,3 +3,6 @@
 /database
 appstate.json
 /temp
+/Fca_Database
+fb_dtsg_data.json
+fca-config.json

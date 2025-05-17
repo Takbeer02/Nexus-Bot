@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 
 module.exports = {
     config: {

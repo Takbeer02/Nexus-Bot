@@ -1,9 +1,8 @@
 # Nexus Bot Documentation
 
-Welcome to the Nexus Bot documentation! This guide will help you understand how to set up, configure, and extend the Nexus Bot system.
+Welcome to the official documentation for Nexus Bot! This guide will help you quickly set up, configure, and extend your Nexus Bot with confidence.
 
-## Table of Contents
-
+## 📦 Table of Contents
 - [Getting Started](#getting-started)
 - [Architecture Overview](#architecture-overview)
 - [Configuration Guide](#configuration-guide)
@@ -12,48 +11,61 @@ Welcome to the Nexus Bot documentation! This guide will help you understand how 
 - [Advanced Features](#advanced-features)
 - [Troubleshooting](#troubleshooting)
 
-## Getting Started
+---
 
-To get started with Nexus Bot:
+## 🚀 Getting Started
 
-1. Install dependencies:
+1. **Install dependencies:**
    ```bash
    npm install
    ```
-
-2. Set up your Facebook credentials in `appstate.json`
-
-3. Configure the bot in `config.json` (see [Configuration Guide](#configuration-guide))
-
-4. Start the bot:
+2. **Add Facebook credentials:**
+   - Place your `appstate.json` in the project root.
+3. **Configure the bot:**
+   - Edit `config.json` (see [Configuration Guide](#configuration-guide)).
+4. **Start Nexus Bot:**
    ```bash
    npm start
    ```
 
-## Architecture Overview
+---
 
-Nexus Bot follows a modular architecture with these components:
+## 🏗️ Architecture Overview
 
-- **Core**: Command and event handling systems
-- **Commands**: Individual bot commands in `/commands` folder
-- **Events**: Event handlers in `/events` folder
-- **Utils**: Helper functions and utilities
-- **Modules**: Core functionality modules
+Nexus Bot is designed for modularity and performance. Key components:
+- **nexus-core/**: Core logic, command/event handling, database, utils
+- **commands/**: All bot commands
+- **events/**: Event handlers
+- **database/**: SQLite DB, backups, temp
+- **docs/**: Documentation
+- **logs/**: Log files
+- **temp/**: Temporary files
+- **Goat-Bot-V2-main/**: Reference Goat-Bot-V2 codebase
+- **Fca_Database/**: (Optional) FCA database
+- **config.json**: Main config
+- **index.js**: Main entry point
+- **package.json**: Node.js dependencies and scripts
 
-The system uses several optimizations including:
-- Memory management and garbage collection
-- Command execution queuing
-- Error rate monitoring and auto-recovery
-- Configuration caching
+**Optimizations include:**
+- Smart memory management
+- Command queueing
+- Auto-recovery on errors
+- Fast configuration caching
 
-## Advanced Features
+---
 
-Nexus Bot includes several advanced features:
+## 🌟 Advanced Features
 
-- **Auto-Recovery**: Automatically restarts on crashes or memory issues
-- **Memory Management**: Monitors and optimizes memory usage
-- **File Watching**: Hot-reloads commands when files change
-- **Permission System**: Role-based access control
-- **GitHub Integration**: Syncs data with GitHub repositories
+- **Auto-Recovery:** Automatic restart on errors or high memory usage
+- **Memory Management:** Proactive monitoring and cleanup
+- **Hot Reloading:** Instantly reload commands on file changes
+- **Role-Based Permissions:** Fine-grained access control
+- **GitHub Sync:** Optional data backup to GitHub
 
-See individual feature documentation for more details.
+For details, see the dedicated docs for each feature.
+
+# nexus-fca Troubleshooting & Tips
+
+// This document is obsolete after migration to nexus-fca. Please refer to the new API docs for nexus-fca usage and troubleshooting.
+// ## Nexus fca can be found on [npm](https://www.npmjs.com/package/nexus-fca) and [GitHub](https://github.com/Nexus-016/Nexus-fCA)
+

@@ -1,39 +1,46 @@
 # Security Guide
 
-## Rate Limiting
-The bot implements multiple layers of rate limiting:
+Nexus Bot includes multiple layers of security to protect your bot, users, and data. Follow these guidelines for a safe deployment.
 
-```javascript
-{
-  "messageRateLimit": {
-    "enabled": true,
-    "windowMs": 60000,  // 1 minute
-    "max": 10          // 10 messages per minute
-  }
+---
+
+## 🚦 Rate Limiting
+Configure message rate limits to prevent spam and abuse:
+```json
+"messageRateLimit": {
+  "enabled": true,
+  "windowMs": 60000,
+  "max": 10
 }
 ```
 
-## Safe Mode
-Safe mode protects against spam and abuse:
+---
 
-- Message limits per user/group
-- Content filtering
-- Activity hours
-- Auto breaks
-- Spam detection
+## 🛡️ Safe Mode
+- Limits messages per user/group
+- Filters unwanted content
+- Restricts activity to set hours
+- Adds auto breaks and spam detection
 
-## Anti-Detection
-Features to avoid Facebook's automated detection:
+---
 
-- Random delays
-- Human-like typing
-- Activity patterns
-- Auto breaks
+## 🕵️ Anti-Detection
+- Random delays and human-like typing
+- Activity patterns and auto breaks
 - User agent rotation
 
-## Best Practices
-1. Use proper rate limits
+---
+
+## ✅ Best Practices
+1. Set proper rate limits
 2. Enable content filtering
-3. Set reasonable daily limits
+3. Set daily message limits
 4. Configure active hours
 5. Enable auto breaks
+6. Regularly review logs and security settings
+
+# nexus-fca Troubleshooting & Tips
+
+// This document is obsolete after migration to nexus-fca. Please refer to the new API docs for nexus-fca usage and troubleshooting.
+// ## Nexus fca can be found on [npm](https://www.npmjs.com/package/nexus-fca) and [GitHub](https://github.com/Nexus-016/Nexus-fCA)
+

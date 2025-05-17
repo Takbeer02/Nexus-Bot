@@ -1,18 +1,23 @@
-const ws3fca = require('ws3-fca');
-const auth = require('./modules/auth');
-const logger = require('./utils/logger');
+const nexusFca = require('nexus-fca');
+const auth = require('./nexus-core/auth');
+const logger = require('./nexus-core/logger');
 const gradient = require('gradient-string');
-const { loadCommands, commands, handleCommand, initializeCommandWatcher } = require('./core/commandHandler');
-const { loadEvents, handleEvent } = require('./core/eventHandler');
+const { loadCommands, commands, handleCommand, initializeCommandWatcher } = require('./nexus-core/commandHandler');
+const { loadEvents, handleEvent } = require('./nexus-core/eventHandler');
 const fs = require('fs');
 const path = require('path');
-const { initGithub } = require('./utils/githubSync');
-const AutoRecovery = require('./utils/autoRecovery');
+const { initGithub } = require('./nexus-core/githubSync');
+const AutoRecovery = require('./nexus-core/autoRecovery');
 
 // Import centralized configuration
-const configLoader = require('./utils/configLoader');
+const configLoader = require('./nexus-core/configLoader');
 // Load configuration early to ensure it's available
 const config = configLoader.load();
+
+// Import database initialization
+const { initializeDatabase } = require('./nexus-core/initDb');
+const { checkDatabaseHealth } = require('./nexus-core/dbInit');
+const cleanupDatabase = require('./nexus-core/cleanupDatabase');
 
 // Custom gradient colors 
 const mainGradient = gradient(['#FF6B6B', '#4ECDC4']);
@@ -35,16 +40,18 @@ const separatorGradient = gradient([
 ]);
 
 const logo = `
-╔═════════════════════════════════════════╗
-║                                         ║
-║   ███╗   ██╗███████╗██╗  ██╗██╗   ██╗  ║
-║   ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║  ║
-║   ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║  ║
-║   ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║  ║
-║   ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝  ║
-║   ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝   ║
-║                                         ║
-╚═════════════════════════════════════════╝`;
+╔═════════════════════════════════════════════╗
+║                                             ║
+║                                             ║
+║ ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗ ║
+║ ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝ ║
+║ ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗ ║
+║ ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║ ║
+║ ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║ ║
+║ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝ ║
+║                                             ║   
+║           Nexus Bot - Ignition X            ║
+╚═════════════════════════════════════════════╝`;
 
 // Define a set of professional boot phases for organized startup
 const BOOT_PHASES = {
@@ -87,9 +94,28 @@ async function displayStartup() {
   console.clear();
   console.log(mainGradient(logo));
   console.log(titleGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(highlightGradient(' Nexus Bot - A Advanced Bot For Facebook Messenger'));
   console.log(highlightGradient(' Author: ') + 'NexusTeam');
-  console.log(highlightGradient(' Version: ') + require('./package.json').version);
+  console.log(highlightGradient(' Version: ') + require('./package.json').version + '   Codename: Ignition X');
   console.log(titleGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+}
+
+// Notify all admins on critical errors
+async function notifyAllAdmins(message) {
+  try {
+    const config = global.config || {};
+    const admins = Array.isArray(config.admins) ? config.admins : [];
+    if (!global.api || !admins.length) return;
+    for (const adminId of admins) {
+      try {
+        await global.api.sendMessage(message, adminId);
+      } catch (e) {
+        logger.debug(`Failed to notify admin ${adminId}: ${e.message}`);
+      }
+    }
+  } catch (e) {
+    logger.error('Failed to notify all admins:', e);
+  }
 }
 
 // Initialize and run the bot
@@ -105,15 +131,14 @@ async function initBot() {
     }
 
     // 3. Initialize optimization and monitoring early
-    logPhase(BOOT_PHASES.SYSTEM, 'Initializing safety systems...');
-    const Optimization = require('./utils/optimization');
+    const Optimization = require('./nexus-core/optimization');
     global.Optimization = Optimization;
     await Optimization.initErrorTracking();
     await Optimization.startMemoryMonitor();
 
     // 4. Initialize database connection and safety checks
     logPhase(BOOT_PHASES.DATABASE, 'Initializing database...');
-    const dbInitializer = require('./utils/dbInitializer');
+    const dbInitializer = require('./nexus-core/dbInitializer');
     const dbSuccess = await dbInitializer.initialize();
     if (!dbSuccess) {
       logger.warn('Database initialization failed, running in fallback mode');
@@ -121,7 +146,7 @@ async function initBot() {
 
     // 5. Initialize permission system (critical for security)
     logPhase(BOOT_PHASES.SYSTEM, 'Initializing permission system...');
-    const permissionManager = require('./utils/permissionManager')(config);
+    const permissionManager = require('./nexus-core/permissionManager')(config);
     global.permissionManager = permissionManager;
     const permSuccess = await permissionManager.initialize();
     if (!permSuccess) {
@@ -166,7 +191,7 @@ async function initBot() {
       logPhase(BOOT_PHASES.DATABASE, 'Initializing database...');
       let dbInitialized = false;
       try {
-        const dbInitializer = require('./utils/dbInitializer');
+        const dbInitializer = require('./nexus-core/dbInitializer');
         await dbInitializer.initialize();
         dbInitialized = true;
         
@@ -179,23 +204,13 @@ async function initBot() {
       
       // Now initialize global system components AFTER database is ready
       logPhase(BOOT_PHASES.INIT, 'Initializing system...');
-      const InitSystem = require('./core/initSystem');
+      const InitSystem = require('./nexus-core/initSystem');
       if (dbInitialized) {
         // Load from database if it was initialized successfully
         await InitSystem.initialize();
       } else {
         // Fall back to loading from JSON files
         await InitSystem.initializeFromFiles();
-      }
-      
-      // Apply WS3-FCA patches to fix issues
-      logPhase(BOOT_PHASES.SYSTEM, 'Applying WS3-FCA patches...');
-      try {
-        const customWs3Fca = require('./modules/customWs3Fca');
-        await customWs3Fca.patchWS3FCA();
-      } catch (patchError) {
-        logger.warn('WS3-FCA patch warning:', patchError.message);
-        logger.info('Continuing with unpatched WS3-FCA');
       }
       
       // Load commands and events before login
@@ -214,7 +229,7 @@ async function initBot() {
       
       // Initialize permission manager
       logPhase(BOOT_PHASES.SYSTEM, 'Initializing permission system...');
-      const permissionManager = require('./utils/permissionManager')(config);
+      const permissionManager = require('./nexus-core/permissionManager')(config);
       global.permissionManager = permissionManager;
       await permissionManager.initialize();
 
@@ -224,19 +239,9 @@ async function initBot() {
         initGithub(config.github);
       }
 
-      // Make optimizations available globally
-      const Optimization = require('./utils/optimization');
-      global.Optimization = Optimization;
-      
       // Create a global cache that can be cleared during optimization
-      const cache = require('./utils/cache');
+      const cache = require('./nexus-core/cache');
       global.messageCache = cache;
-      
-      // Initialize error tracking and memory monitoring
-      Optimization.initErrorTracking();
-      
-      // Start memory monitoring
-      Optimization.startMemoryMonitor();
       
       // Make config available globally using the configLoader instance
       global.configLoader = configLoader;
@@ -275,6 +280,12 @@ async function initBot() {
         throw new Error(`Failed to login: ${loginError.message}`);
       }
       
+      // Batch sync all threads and users to the database before listening for messages
+      if (api) {
+        const InitSystem = require('./nexus-core/initSystem');
+        await InitSystem.batchSyncDatabaseEntities(api);
+      }
+
       // Check for restart markers and handle recovery
       await AutoRecovery.checkRestartMarker(api);
       
@@ -381,7 +392,27 @@ async function cleanup() {
   }
 }
 
-initBot();
+// Call database health check and cleanup during initialization
+(async () => {
+  try {
+    await checkDatabaseHealth();
+    await cleanupDatabase();
+  } catch (error) {
+    console.error('Database initialization or cleanup failed:', error);
+    process.exit(1);
+  }
+})();
+
+(async () => {
+  try {
+    await initializeDatabase();
+    // Continue with bot startup
+    await initBot();
+  } catch (error) {
+    console.error('Failed to initialize database:', error);
+    process.exit(1);
+  }
+})();
 
 // Handle exit
 process.on('SIGINT', () => {
@@ -399,17 +430,59 @@ process.on('exit', (code) => {
 });
 
 // Handle uncaught exceptions for auto-restart
-process.on('uncaughtException', (error) => {
-  logger.error('Uncaught exception:', error);
+process.on('uncaughtException', async (error) => {
+  console.error('Uncaught Exception:', error);
+  await notifyAllAdmins(`❗ Uncaught Exception:\n${error.stack || error}`);
   if (global.AutoRecovery) {
     AutoRecovery.trackError(error);
   }
+  if (global.adminNotifier) {
+    await global.adminNotifier.notifyError(error, {
+      source: 'Uncaught Exception',
+      critical: true
+    });
+  }
+  setTimeout(() => {
+    process.exit(1);
+  }, 1000);
 });
 
 // Handle unhandled promise rejections for auto-restart
-process.on('unhandledRejection', (reason) => {
-  logger.error('Unhandled promise rejection:', reason);
-  if (global.AutoRecovery) {
-    AutoRecovery.trackError(new Error(String(reason)));
+process.on('unhandledRejection', async (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  await notifyAllAdmins(`❗ Unhandled Promise Rejection:\n${reason}`);
+  if (global.adminNotifier) {
+    await global.adminNotifier.notifyError(reason, {
+      source: 'Unhandled Promise Rejection',
+      critical: true
+    });
   }
+});
+
+// Setup error handling and admin notifications
+process.on('unhandledRejection', async (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  await notifyAllAdmins(`❗ Unhandled Promise Rejection:\n${reason}`);
+  if (global.adminNotifier) {
+    await global.adminNotifier.notifyError(reason, {
+      source: 'Unhandled Promise Rejection',
+      critical: true
+    });
+  }
+});
+
+process.on('uncaughtException', async (error) => {
+  console.error('Uncaught Exception:', error);
+  await notifyAllAdmins(`❗ Uncaught Exception:\n${error.stack || error}`);
+  if (global.adminNotifier) {
+    await global.adminNotifier.notifyError(error, {
+      source: 'Uncaught Exception',
+      critical: true
+    });
+  }
+  
+  // Wait for notification to be sent before potentially exiting
+  setTimeout(() => {
+    process.exit(1);
+  }, 1000);
 });

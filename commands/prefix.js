@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
@@ -19,7 +19,7 @@ module.exports = {
   
   execute: async function({ api, event, args, prefix }) {
     const { threadID, messageID } = event;
-    const defaultPrefix = global.config?.prefix || '!';
+    const defaultPrefix = global.config?.botConfig?.prefix || '!';
     
     // Initialize thread prefixes if not exist
     if (!global.threadPrefixes) {

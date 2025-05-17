@@ -1,4 +1,4 @@
-const logger = require('../utils/logger');
+const logger = require('../nexus-core/logger');
 
 module.exports = {
   config: {
@@ -20,7 +20,7 @@ module.exports = {
     const botID = api.getCurrentUserID();
     
     // Safety check - must be owner
-    if (senderID !== global.config?.owner) {
+    if (senderID !== global.config?.botConfig?.owner) {
       return api.sendMessage("❌ Only the bot owner can use this command.", threadID, messageID);
     }
 

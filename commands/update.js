@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const AdmZip = require('adm-zip');
-const logger = require('../utils/logger');
-const { notifyAdmin } = require('../core/commandHandler');
+const logger = require('../nexus-core/logger');
+const commandHandler = require('../nexus-core/commandHandler');
 
 module.exports = {
   config: {
@@ -20,12 +20,10 @@ module.exports = {
     guide: "{prefix}update [check/install/force]"
   },
 
-  async execute({ api, event, args }) {
+  run: async function({ api, event, args }) {
     const { threadID, messageID } = event;
     const option = args[0]?.toLowerCase();
-    
     try {
-      // Create simple version check
       let currentVersion = "0.0.0";
       try {
         const packageJson = require('../package.json');
@@ -33,39 +31,27 @@ module.exports = {
       } catch (e) {
         logger.error("Could not read package.json:", e);
       }
-
-      // Get latest version from GitHub
       api.sendMessage("🔍 Checking for updates...", threadID);
-      
       const repoOwner = global.config?.github?.owner || 'Nexus-016';
       const repoName = global.config?.github?.repo || 'Nexus-Bot';
-
       const response = await axios.get(
         `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/package.json`,
         { headers: { 'User-Agent': 'NexusBot-Updater' } }
       );
-
       const latestVersion = response.data.version;
-      
-      // Compare versions properly
       const needsUpdate = isNewerVersion(latestVersion, currentVersion);
-
       if (!needsUpdate && option !== 'force') {
         return api.sendMessage(
-          `✅ Bot is up to date!\nCurrent version: ${currentVersion}`, 
+          `✅ Bot is up to date!\nCurrent version: ${currentVersion}`,
           threadID
         );
       }
-
-      // Show update message
       const updateMsg = `📥 Update available!\n\n` +
         `Current version: ${currentVersion}\n` +
         `Latest version: ${latestVersion}\n\n` +
-        `Do you want to update? Reply with "yes" to update.`;
-
+        `Do you want to update? Reply with \"yes\" to update.`;
       return api.sendMessage(updateMsg, threadID, (err, info) => {
         if (err) return logger.error("Error sending update message:", err);
-        
         global.client.handleReply.push({
           name: this.config.name,
           messageID: info.messageID,
@@ -74,11 +60,10 @@ module.exports = {
           data: { repoOwner, repoName, currentVersion, latestVersion }
         });
       });
-
     } catch (error) {
       logger.error("Update check error:", error);
       return api.sendMessage(
-        `❌ Error checking for updates: ${error.message}`, 
+        `❌ Error checking for updates: ${error.message}`,
         threadID
       );
     }
@@ -86,21 +71,14 @@ module.exports = {
 
   handleReply: async function({ api, event, handleReply }) {
     const { threadID, messageID, senderID, body } = event;
-    
-    // Check if this is the original author
     if (senderID !== handleReply.author) return;
-    
-    // Process user's response
     const response = body.toLowerCase().trim();
-    
     if (response === "yes") {
       const { repoOwner, repoName, currentVersion, latestVersion } = handleReply.data;
       return await performUpdate(api, threadID, repoOwner, repoName, currentVersion, latestVersion);
-    } 
-    else if (response === "no") {
+    } else if (response === "no") {
       return api.sendMessage("✅ Update canceled. The bot will continue running on the current version.", threadID);
-    } 
-    else {
+    } else {
       return api.sendMessage("⚠️ Invalid response. Please reply with 'yes' or 'no'.", threadID);
     }
   }
@@ -447,7 +425,7 @@ async function isAdminUser(api, userID) {
   // Fallback to config.json
   try {
     const config = global.config || require('../config.json');
-    return Array.isArray(config.admins) && config.admins.includes(userID);
+    return Array.isArray(config.botConfig?.admins) && config.botConfig.admins.includes(userID);
   } catch (error) {
     logger.error("Error loading config:", error);
     return false;

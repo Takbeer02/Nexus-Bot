@@ -1,3 +1,5 @@
+const permissionManager = require('../nexus-core/permissionManager');
+
 module.exports = {
   config: {
     name: "admin",
@@ -15,7 +17,7 @@ module.exports = {
   execute: async function({ api, event, args }) {
     const { threadID, senderID } = event;
     
-    if (!global.permissionManager) {
+    if (!permissionManager) {
       return api.sendMessage("❌ Permission system not initialized.", threadID);
     }
     
@@ -55,7 +57,7 @@ async function handleListAdmins(api, event) {
   try {
     const { threadID } = event;
     const config = global.config || {};
-    const admins = Array.isArray(config.admins) ? config.admins : [];
+    const admins = Array.isArray(config.botConfig?.admins) ? config.botConfig.admins : [];
     
     if (admins.length === 0) {
       return api.sendMessage("❌ No admins configured.", threadID);
@@ -94,12 +96,12 @@ async function handleAddAdmin(api, event, targetID) {
       const userName = userInfo[targetID].name;
       
       // Set role to admin (2)
-      await global.permissionManager.setUserRole(targetID, 2);
+      await permissionManager.setUserRole(targetID, 2);
       
       // Update config
-      if (!global.config.admins) global.config.admins = [];
-      if (!global.config.admins.includes(targetID)) {
-        global.config.admins.push(targetID);
+      if (!global.config.botConfig.admins) global.config.botConfig.admins = [];
+      if (!global.config.botConfig.admins.includes(targetID)) {
+        global.config.botConfig.admins.push(targetID);
       }
       
       return api.sendMessage(`✅ Added ${userName} (${targetID}) as a bot admin.`, threadID);
@@ -117,17 +119,17 @@ async function handleRemoveAdmin(api, event, targetID) {
     const { threadID } = event;
     
     // Check if user is an admin
-    const userRole = await global.permissionManager.getUserRole(targetID);
+    const userRole = await permissionManager.getUserRole(targetID);
     if (userRole < 2) {
       return api.sendMessage(`❌ User with ID ${targetID} is not an admin.`, threadID);
     }
     
     // Remove admin role
-    await global.permissionManager.setUserRole(targetID, 0);
+    await permissionManager.setUserRole(targetID, 0);
     
     // Update config
-    if (global.config.admins && global.config.admins.includes(targetID)) {
-      global.config.admins = global.config.admins.filter(id => id !== targetID);
+    if (global.config.botConfig.admins && global.config.botConfig.admins.includes(targetID)) {
+      global.config.botConfig.admins = global.config.botConfig.admins.filter(id => id !== targetID);
     }
     
     return api.sendMessage(`✅ Removed admin status from user with ID ${targetID}.`, threadID);
@@ -142,7 +144,7 @@ async function handleStatus(api, event) {
     const { threadID } = event;
     const config = global.config || {};
     
-    const adminCount = Array.isArray(config.admins) ? config.admins.length : 0;
+    const adminCount = Array.isArray(config.botConfig?.admins) ? config.botConfig.admins.length : 0;
     const memoryUsage = process.memoryUsage();
     const uptime = process.uptime();
     
@@ -154,7 +156,7 @@ async function handleStatus(api, event) {
                           `👥 Admins: ${adminCount}\n` +
                           `🔄 Uptime: ${days}d ${hours}h ${minutes}m\n` +
                           `💾 Memory: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB / ${Math.round(memoryUsage.rss / 1024 / 1024)}MB\n` +
-                          `🔐 Permission System: ${global.permissionManager ? '✅ Active' : '❌ Inactive'}`;
+                          `🔐 Permission System: ${permissionManager ? '✅ Active' : '❌ Inactive'}`;
     
     return api.sendMessage(statusMessage, threadID);
   } catch (error) {

@@ -1,6 +1,10 @@
-# Database Schema
+# Database Schema Reference
 
-## Users Table
+Nexus Bot uses SQLite for fast, reliable storage. Here are the main tables and their structure.
+
+---
+
+## 👤 Users Table
 ```sql
 CREATE TABLE users (
   id TEXT PRIMARY KEY,
@@ -17,7 +21,9 @@ CREATE TABLE users (
 );
 ```
 
-## Groups Table
+---
+
+## 👥 Groups Table
 ```sql
 CREATE TABLE groups (
   id TEXT PRIMARY KEY,
@@ -30,7 +36,9 @@ CREATE TABLE groups (
 );
 ```
 
-## Transactions Table
+---
+
+## 💸 Transactions Table
 ```sql
 CREATE TABLE transactions (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,3 +50,5 @@ CREATE TABLE transactions (
   FOREIGN KEY(user_id) REFERENCES users(id)
 );
 ```
+
+---

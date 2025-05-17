@@ -1,6 +1,6 @@
-const logger = require('../utils/logger');
-const messageUtils = require('../utils/messageUtils');
-const dbManager = require('../modules/dbManager');
+const logger = require('../nexus-core/logger');
+const messageUtils = require('../nexus-core/messageUtils');
+const dbManager = require('../nexus-core/dbManager');
 const config = require('../config.json');
 
 module.exports = {
