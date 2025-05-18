@@ -228,50 +228,46 @@ class InitSystem {
     }
   }
 
-  /**
-   * Batch sync all threads and users to the database at startup
-   * @param {Object} api - Facebook API instance
-   */
-  static async batchSyncDatabaseEntities(api) {
-    const dbManager = require('./dbManager');
-    const ThreadHelper = require('./threadHelper');
-    try {
-      logger.info('Starting batch sync of threads and users to database...');
-      // 1. Fetch all threads (increase limit as needed)
-      const threads = await ThreadHelper.getThreadList(api, 100);
-      let totalUsers = 0;
-      for (const thread of threads) {
-        if (!thread.threadID) continue;
-        // 2. Ensure thread exists in DB
-        await dbManager.createGroup(thread.threadID, thread.name || 'Unknown Group');
-        // 3. Fetch full thread info (for participants)
-        let threadInfo;
-        try {
-          threadInfo = await ThreadHelper.getThreadInfo(api, thread.threadID);
-        } catch (err) {
-          logger.warn(`Failed to fetch info for thread ${thread.threadID}: ${err.message}`);
-          continue;
-        }
-        // 4. Add all participants to DB
-        const participants = threadInfo.participantIDs || [];
-        if (participants.length > 0) {
-          const userInfos = await ThreadHelper.getUsersInfo(api, participants);
-          for (const userID of participants) {
-            const name = userInfos[userID]?.name || 'Unknown User';
-            await dbManager.createUser(userID, name);
-            totalUsers++;
-          }
-        }
-        // 5. Optionally update thread admins
-        if (global.permissionManager && threadInfo.isGroup) {
-          await global.permissionManager.refreshThreadAdmins(api, thread.threadID).catch(() => {});
-        }
-      }
-      logger.info(`Batch sync complete: ${threads.length} threads, ${totalUsers} users processed.`);
-    } catch (error) {
-      logger.error('Batch sync error:', error);
-    }
-  }
+  // static async batchSyncDatabaseEntities(api) {
+  //   const dbManager = require('./dbManager');
+  //   const ThreadHelper = require('./threadHelper');
+  //   try {
+  //     logger.info('Starting batch sync of threads and users to database...');
+  //     // 1. Fetch all threads (increase limit as needed)
+  //     const threads = await ThreadHelper.getThreadList(api, 100);
+  //     let totalUsers = 0;
+  //     for (const thread of threads) {
+  //       if (!thread.threadID) continue;
+  //       // 2. Ensure thread exists in DB
+  //       await dbManager.createGroup(thread.threadID, thread.name || 'Unknown Group');
+  //       // 3. Fetch full thread info (for participants)
+  //       let threadInfo;
+  //       try {
+  //         threadInfo = await ThreadHelper.getThreadInfo(api, thread.threadID);
+  //       } catch (err) {
+  //         logger.warn(`Failed to fetch info for thread ${thread.threadID}: ${err.message}`);
+  //         continue;
+  //       }
+  //       // 4. Add all participants to DB
+  //       const participants = threadInfo.participantIDs || [];
+  //       if (participants.length > 0) {
+  //         const userInfos = await ThreadHelper.getUsersInfo(api, participants);
+  //         for (const userID of participants) {
+  //           const name = userInfos[userID]?.name || 'Unknown User';
+  //           await dbManager.createUser(userID, name);
+  //           totalUsers++;
+  //         }
+  //       }
+  //       // 5. Optionally update thread admins
+  //       if (global.permissionManager && threadInfo.isGroup) {
+  //         await global.permissionManager.refreshThreadAdmins(api, thread.threadID).catch(() => {});
+  //       }
+  //     }
+  //     logger.info(`Batch sync complete: ${threads.length} threads, ${totalUsers} users processed.`);
+  //   } catch (error) {
+  //     logger.error('Batch sync error:', error);
+  //   }
+  // }
 }
 
 module.exports = InitSystem;

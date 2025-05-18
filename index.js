@@ -39,6 +39,10 @@ const separatorGradient = gradient([
   '#60A5FA'  // lighter blue
 ]);
 
+// New universal gradient for all startup log lines
+const startupGradient = gradient(['#FFD93D', '#FF6B6B']); // yellow to red
+
+// Restore large ASCII logo/banner
 const logo = `
 ╔═════════════════════════════════════════════╗
 ║                                             ║
@@ -53,6 +57,9 @@ const logo = `
 ║           Nexus Bot - Ignition X            ║
 ╚═════════════════════════════════════════════╝`;
 
+// Compact logo/banner for professional startup
+const compactLogo = highlightGradient('Nexus Bot') + ' ' + mainGradient('•') + ' ' + infoGradient('Ignition X');
+
 // Define a set of professional boot phases for organized startup
 const BOOT_PHASES = {
   INIT: '📋 INITIALIZATION',
@@ -66,18 +73,19 @@ const BOOT_PHASES = {
 
 // Custom log format for startup phases
 function logPhase(phase, message) {
-  console.log(`\n${highlightGradient(phase)}`);
-  console.log(`${infoGradient('┃')} ${message}`);
+  // Use a compact, colorized single-line format
+  const phaseLabel = startupGradient(`[${phase.replace(/[^A-Z]/g, '')}]`);
+  console.log(`${phaseLabel} ${message}`);
 }
 
 function logStep(icon, message, status = null) {
-  const statusIcons = {
-    success: successGradient(' ✓ '),
-    warning: gradient(['#FCD34D', '#F59E0B'])(' ⚠ '),
-    error: gradient(['#DC2626', '#EF4444'])(' ✗ '),
-    info: infoGradient(' ℹ')
-  };
-  console.log(`${icon} ${message}${status ? statusIcons[status] : ''}`);
+  // Use a compact, colorized single-line format for steps
+  let statusText = '';
+  if (status === 'success') statusText = startupGradient('✓');
+  else if (status === 'warning') statusText = startupGradient('!');
+  else if (status === 'error') statusText = startupGradient('✗');
+  else if (status === 'info') statusText = startupGradient('i');
+  console.log(`${startupGradient('-')} ${message} ${statusText}`);
 }
 
 // Loading animation frames with cyan color
@@ -89,15 +97,26 @@ function displayLoadingAnimation(message) {
   frameIndex = (frameIndex + 1) % frames.length;
 }
 
-// Clear console and show banner
-async function displayStartup() {
+// Restore multi-line displayStartup with tagline
+async function displayStartup(account, uid, prefix, commandCount, customPrefixCount) {
   console.clear();
-  console.log(mainGradient(logo));
-  console.log(titleGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
-  console.log(highlightGradient(' Nexus Bot - A Advanced Bot For Facebook Messenger'));
-  console.log(highlightGradient(' Author: ') + 'NexusTeam');
-  console.log(highlightGradient(' Version: ') + require('./package.json').version + '   Codename: Ignition X');
-  console.log(titleGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+  console.log(startupGradient(logo));
+  console.log(startupGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log(startupGradient(' Nexus Bot - A Advanced Bot For Facebook Messenger'));
+  console.log(startupGradient(' Author: NexusTeam'));
+  console.log(startupGradient(' Version: ') + require('./package.json').version + '   Codename: Ignition X');
+  // Tagline with gradient color
+  console.log(startupGradient(' Automate the Grind. Dominate the Flow.'));
+  console.log(startupGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+  console.log(startupGradient(' Status: Online ✓'));
+  console.log(startupGradient(' Account: ') + account);
+  console.log(startupGradient(' UID: ') + uid);
+  console.log(startupGradient(' Prefix: ') + prefix);
+  console.log(startupGradient(' Commands: ') + commandCount);
+  if (customPrefixCount > 0) {
+    console.log(startupGradient(' Custom Thread Prefixes: ') + customPrefixCount);
+  }
+  console.log(startupGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
 }
 
 // Notify all admins on critical errors
@@ -110,7 +129,12 @@ async function notifyAllAdmins(message) {
       try {
         await global.api.sendMessage(message, adminId);
       } catch (e) {
-        logger.debug(`Failed to notify admin ${adminId}: ${e.message}`);
+        // Clean handling for disabled threads
+        if (e && (e.errorSummary === 'Thread Disabled' || (e.errorDescription && e.errorDescription.includes('thread is disabled')))) {
+          logger.info(`Admin inbox for ${adminId} is disabled, skipping notification.`);
+        } else {
+          logger.debug(`Failed to notify admin ${adminId}: ${e.message || e}`);
+        }
       }
     }
   } catch (e) {
@@ -280,12 +304,6 @@ async function initBot() {
         throw new Error(`Failed to login: ${loginError.message}`);
       }
       
-      // Batch sync all threads and users to the database before listening for messages
-      if (api) {
-        const InitSystem = require('./nexus-core/initSystem');
-        await InitSystem.batchSyncDatabaseEntities(api);
-      }
-
       // Check for restart markers and handle recovery
       await AutoRecovery.checkRestartMarker(api);
       
@@ -296,16 +314,7 @@ async function initBot() {
       api.commands = commands;
 
       // Success message
-      await displayStartup();
-      console.log(successGradient(' Status: ') + 'Online ✓');
-      console.log(highlightGradient(' Account: ') + userName);
-      console.log(highlightGradient(' UID: ') + userInfo);
-      console.log(highlightGradient(' Prefix: ') + config.prefix);
-      console.log(highlightGradient(' Commands: ') + commands.size);
-      if (global.threadPrefixes && global.threadPrefixes.size > 0) {
-        console.log(highlightGradient(' Custom Thread Prefixes: ') + global.threadPrefixes.size);
-      }
-      console.log(separatorGradient('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'));
+      await displayStartup(userName, userInfo, config.prefix, commands.size, global.threadPrefixes ? global.threadPrefixes.size : 0);
 
       // Start listening with improved error handling
       api.listenMqtt((err, message) => {

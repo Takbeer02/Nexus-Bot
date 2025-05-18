@@ -52,6 +52,20 @@ module.exports = {
           messageUtils.createMention(welcomeText, mentions),
           threadID
         );
+
+        // --- Sync all users and admins for this thread ---
+        const threadInfo = await api.getThreadInfo(threadID);
+        const participants = threadInfo.participantIDs || [];
+        if (participants.length > 0) {
+          const userInfos = await api.getUserInfo(participants);
+          for (const userID of participants) {
+            const userName = userInfos[userID]?.name || 'Unknown User';
+            await dbManager.createUser(userID, userName);
+          }
+        }
+        if (global.permissionManager && threadInfo.adminIDs) {
+          await global.permissionManager.refreshThreadAdmins(api, threadID);
+        }
       }
 
       // Member removed from group
@@ -73,6 +87,20 @@ module.exports = {
 
         // Send goodbye message
         await api.sendMessage(`${name} has left the group. 👋`, threadID);
+
+        // --- Sync all users and admins for this thread ---
+        const threadInfo = await api.getThreadInfo(threadID);
+        const participants = threadInfo.participantIDs || [];
+        if (participants.length > 0) {
+          const userInfos = await api.getUserInfo(participants);
+          for (const userID of participants) {
+            const userName = userInfos[userID]?.name || 'Unknown User';
+            await dbManager.createUser(userID, userName);
+          }
+        }
+        if (global.permissionManager && threadInfo.adminIDs) {
+          await global.permissionManager.refreshThreadAdmins(api, threadID);
+        }
       }
 
       // Handle different event types
@@ -105,6 +133,26 @@ module.exports = {
             ? `A group call has started! 📞`
             : `The group call has ended! 📞`;
           api.sendMessage(callMessage, threadID);
+          break;
+
+        case 'log:thread-admins':
+        case 'log:thread-approval-mode':
+        case 'log:thread-admins-change':
+          // --- Sync all users and admins for this thread ---
+          if (threadID) {
+            const threadInfo = await api.getThreadInfo(threadID);
+            const participants = threadInfo.participantIDs || [];
+            if (participants.length > 0) {
+              const userInfos = await api.getUserInfo(participants);
+              for (const userID of participants) {
+                const userName = userInfos[userID]?.name || 'Unknown User';
+                await dbManager.createUser(userID, userName);
+              }
+            }
+            if (global.permissionManager && threadInfo.adminIDs) {
+              await global.permissionManager.refreshThreadAdmins(api, threadID);
+            }
+          }
           break;
       }
     } catch (error) {

@@ -40,7 +40,6 @@ Nexus Bot is designed for modularity and performance. Key components:
 - **docs/**: Documentation
 - **logs/**: Log files
 - **temp/**: Temporary files
-- **Goat-Bot-V2-main/**: Reference Goat-Bot-V2 codebase
 - **Fca_Database/**: (Optional) FCA database
 - **config.json**: Main config
 - **index.js**: Main entry point

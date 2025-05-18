@@ -40,7 +40,10 @@ const logger = winston.createLogger({
         winston.format.timestamp({
           format: 'HH:mm:ss'
         }),
-        winston.format.printf(info => `[${info.timestamp}${info.level}: ${info.message}`)
+        winston.format.printf(info => {
+          // Compact, professional log: [time] [level] message
+          return `[${info.timestamp}] [${info.level}] ${info.message}`;
+        })
       )
     }),
     

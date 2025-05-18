@@ -1,0 +1,474 @@
+2025-05-18 23:05:02 info: Database cleanup logic will be implemented here.
+2025-05-18 23:05:02 info: Database cleanup logic will be implemented here.
+2025-05-18 23:05:02 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:05:02 info: Database cleanup logic will be implemented here.
+2025-05-18 23:05:02 info: Starting Nexus Bot initialization...
+2025-05-18 23:05:02 info: Error tracking system initialized
+2025-05-18 23:05:02 info: Memory monitoring started
+2025-05-18 23:05:02 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:05:02 info: Permissions tables initialized
+2025-05-18 23:05:02 info: Database initialized successfully
+2025-05-18 23:05:02 info: Initializing permission manager...
+2025-05-18 23:05:02 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:05:02 info: Permission manager initialized successfully
+2025-05-18 23:05:02 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:05:02 info: Permissions tables initialized
+2025-05-18 23:05:02 info: Database initialized successfully
+2025-05-18 23:05:02 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:05:02 info: No migration needed - using database
+2025-05-18 23:05:02 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:05:02 info: Loaded 0 custom keywords from database
+2025-05-18 23:05:02 info: Loaded command: admin [admin]
+2025-05-18 23:05:02 info: Loaded command: allout [admin]
+2025-05-18 23:05:02 info: Loaded command: analytics [admin]
+2025-05-18 23:05:02 info: Loaded command: stdl [utility]
+2025-05-18 23:05:02 info: Loaded command: errors [admin]
+2025-05-18 23:05:02 info: Loaded command: eval [admin]
+2025-05-18 23:05:02 info: Loaded command: feature-toggle [system]
+2025-05-18 23:05:02 info: Loaded command: help [system]
+2025-05-18 23:05:02 info: Loaded command: keyword [system]
+2025-05-18 23:05:02 info: Loaded command: ping [info]
+2025-05-18 23:05:02 info: Loaded command: prefix [system]
+2025-05-18 23:05:02 info: Loaded command: reload [admin]
+2025-05-18 23:05:02 info: Loaded command: restart [admin]
+2025-05-18 23:05:02 info: Loaded command: resync [admin]
+2025-05-18 23:05:02 info: Loaded command: say [utility]
+2025-05-18 23:05:02 info: Loaded command: stats [admin]
+2025-05-18 23:05:02 info: Loaded command: thread [admin]
+2025-05-18 23:05:02 info: Loaded command: update [admin]
+2025-05-18 23:05:02 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:05:02 info: Loaded event: adminNoti
+2025-05-18 23:05:02 info: Loaded event: autoUptime
+2025-05-18 23:05:02 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:05:02 info: Loaded event: groupEvent
+2025-05-18 23:05:02 info: Loaded event: introMessage
+2025-05-18 23:05:02 info: Loaded event: messageEvent
+2025-05-18 23:05:02 info: Loaded event: ready
+2025-05-18 23:05:02 info: Initializing permission manager...
+2025-05-18 23:05:02 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:05:02 info: Permission manager initialized successfully
+2025-05-18 23:05:03 info: Loaded AppState successfully
+2025-05-18 23:08:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:08:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:08:51 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:08:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:08:51 info: Starting Nexus Bot initialization...
+2025-05-18 23:08:51 info: Error tracking system initialized
+2025-05-18 23:08:51 info: Memory monitoring started
+2025-05-18 23:08:51 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:08:51 info: Permissions tables initialized
+2025-05-18 23:08:51 info: Database initialized successfully
+2025-05-18 23:08:51 info: Initializing permission manager...
+2025-05-18 23:08:51 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:08:51 info: Permission manager initialized successfully
+2025-05-18 23:08:51 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:08:51 info: Permissions tables initialized
+2025-05-18 23:08:51 info: Database initialized successfully
+2025-05-18 23:08:51 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:08:51 info: No migration needed - using database
+2025-05-18 23:08:51 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:08:51 info: Loaded 0 custom keywords from database
+2025-05-18 23:08:51 info: Loaded command: admin [admin]
+2025-05-18 23:08:51 info: Loaded command: allout [admin]
+2025-05-18 23:08:51 info: Loaded command: analytics [admin]
+2025-05-18 23:08:51 info: Loaded command: stdl [utility]
+2025-05-18 23:08:51 info: Loaded command: errors [admin]
+2025-05-18 23:08:51 info: Loaded command: eval [admin]
+2025-05-18 23:08:51 info: Loaded command: feature-toggle [system]
+2025-05-18 23:08:51 info: Loaded command: help [system]
+2025-05-18 23:08:51 info: Loaded command: keyword [system]
+2025-05-18 23:08:51 info: Loaded command: ping [info]
+2025-05-18 23:08:51 info: Loaded command: prefix [system]
+2025-05-18 23:08:51 info: Loaded command: reload [admin]
+2025-05-18 23:08:51 info: Loaded command: restart [admin]
+2025-05-18 23:08:51 info: Loaded command: resync [admin]
+2025-05-18 23:08:51 info: Loaded command: say [utility]
+2025-05-18 23:08:51 info: Loaded command: stats [admin]
+2025-05-18 23:08:51 info: Loaded command: thread [admin]
+2025-05-18 23:08:51 info: Loaded command: update [admin]
+2025-05-18 23:08:51 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:08:51 info: Loaded event: adminNoti
+2025-05-18 23:08:51 info: Loaded event: autoUptime
+2025-05-18 23:08:51 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:08:51 info: Loaded event: groupEvent
+2025-05-18 23:08:51 info: Loaded event: introMessage
+2025-05-18 23:08:51 info: Loaded event: messageEvent
+2025-05-18 23:08:51 info: Loaded event: ready
+2025-05-18 23:08:51 info: Initializing permission manager...
+2025-05-18 23:08:52 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:08:52 info: Permission manager initialized successfully
+2025-05-18 23:08:52 info: Loaded AppState successfully
+2025-05-18 23:14:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:14:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:14:39 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:14:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:14:39 info: Starting Nexus Bot initialization...
+2025-05-18 23:14:39 info: Error tracking system initialized
+2025-05-18 23:14:39 info: Memory monitoring started
+2025-05-18 23:14:39 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:14:39 info: Permissions tables initialized
+2025-05-18 23:14:39 info: Database initialized successfully
+2025-05-18 23:14:39 info: Initializing permission manager...
+2025-05-18 23:14:40 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:14:40 info: Permission manager initialized successfully
+2025-05-18 23:14:40 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:14:40 info: Permissions tables initialized
+2025-05-18 23:14:40 info: Database initialized successfully
+2025-05-18 23:14:40 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:14:40 info: No migration needed - using database
+2025-05-18 23:14:40 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:14:40 info: Loaded 0 custom keywords from database
+2025-05-18 23:14:40 info: Loaded command: admin [admin]
+2025-05-18 23:14:40 info: Loaded command: allout [admin]
+2025-05-18 23:14:40 info: Loaded command: analytics [admin]
+2025-05-18 23:14:40 info: Loaded command: stdl [utility]
+2025-05-18 23:14:40 info: Loaded command: errors [admin]
+2025-05-18 23:14:40 info: Loaded command: eval [admin]
+2025-05-18 23:14:40 info: Loaded command: feature-toggle [system]
+2025-05-18 23:14:40 info: Loaded command: help [system]
+2025-05-18 23:14:40 info: Loaded command: keyword [system]
+2025-05-18 23:14:40 info: Loaded command: ping [info]
+2025-05-18 23:14:40 info: Loaded command: prefix [system]
+2025-05-18 23:14:40 info: Loaded command: reload [admin]
+2025-05-18 23:14:40 info: Loaded command: restart [admin]
+2025-05-18 23:14:40 info: Loaded command: resync [admin]
+2025-05-18 23:14:40 info: Loaded command: say [utility]
+2025-05-18 23:14:40 info: Loaded command: stats [admin]
+2025-05-18 23:14:40 info: Loaded command: thread [admin]
+2025-05-18 23:14:40 info: Loaded command: update [admin]
+2025-05-18 23:14:40 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:14:40 info: Loaded event: adminNoti
+2025-05-18 23:14:40 info: Loaded event: autoUptime
+2025-05-18 23:14:40 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:14:40 info: Loaded event: groupEvent
+2025-05-18 23:14:40 info: Loaded event: introMessage
+2025-05-18 23:14:40 info: Loaded event: messageEvent
+2025-05-18 23:14:40 info: Loaded event: ready
+2025-05-18 23:14:40 info: Initializing permission manager...
+2025-05-18 23:14:41 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:14:41 info: Permission manager initialized successfully
+2025-05-18 23:14:41 info: Loaded AppState successfully
+2025-05-18 23:19:58 info: Database cleanup logic will be implemented here.
+2025-05-18 23:19:58 info: Database cleanup logic will be implemented here.
+2025-05-18 23:19:58 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:19:58 info: Database cleanup logic will be implemented here.
+2025-05-18 23:19:58 info: Starting Nexus Bot initialization...
+2025-05-18 23:19:58 info: Error tracking system initialized
+2025-05-18 23:19:58 info: Memory monitoring started
+2025-05-18 23:19:58 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:19:58 info: Permissions tables initialized
+2025-05-18 23:19:58 info: Database initialized successfully
+2025-05-18 23:19:58 info: Initializing permission manager...
+2025-05-18 23:19:59 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:19:59 info: Permission manager initialized successfully
+2025-05-18 23:19:59 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:19:59 info: Permissions tables initialized
+2025-05-18 23:19:59 info: Database initialized successfully
+2025-05-18 23:19:59 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:19:59 info: No migration needed - using database
+2025-05-18 23:19:59 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:19:59 info: Loaded 0 custom keywords from database
+2025-05-18 23:19:59 info: Loaded command: admin [admin]
+2025-05-18 23:19:59 info: Loaded command: allout [admin]
+2025-05-18 23:19:59 info: Loaded command: analytics [admin]
+2025-05-18 23:19:59 info: Loaded command: stdl [utility]
+2025-05-18 23:19:59 info: Loaded command: errors [admin]
+2025-05-18 23:19:59 info: Loaded command: eval [admin]
+2025-05-18 23:19:59 info: Loaded command: feature-toggle [system]
+2025-05-18 23:19:59 info: Loaded command: help [system]
+2025-05-18 23:19:59 info: Loaded command: keyword [system]
+2025-05-18 23:19:59 info: Loaded command: ping [info]
+2025-05-18 23:19:59 info: Loaded command: prefix [system]
+2025-05-18 23:19:59 info: Loaded command: reload [admin]
+2025-05-18 23:19:59 info: Loaded command: restart [admin]
+2025-05-18 23:19:59 info: Loaded command: resync [admin]
+2025-05-18 23:19:59 info: Loaded command: say [utility]
+2025-05-18 23:19:59 info: Loaded command: stats [admin]
+2025-05-18 23:19:59 info: Loaded command: thread [admin]
+2025-05-18 23:19:59 info: Loaded command: update [admin]
+2025-05-18 23:19:59 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:19:59 info: Loaded event: adminNoti
+2025-05-18 23:19:59 info: Loaded event: autoUptime
+2025-05-18 23:19:59 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:19:59 info: Loaded event: groupEvent
+2025-05-18 23:19:59 info: Loaded event: introMessage
+2025-05-18 23:19:59 info: Loaded event: messageEvent
+2025-05-18 23:19:59 info: Loaded event: ready
+2025-05-18 23:19:59 info: Initializing permission manager...
+2025-05-18 23:19:59 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:19:59 info: Permission manager initialized successfully
+2025-05-18 23:19:59 info: Loaded AppState successfully
+2025-05-18 23:22:52 info: Database cleanup logic will be implemented here.
+2025-05-18 23:22:52 info: Database cleanup logic will be implemented here.
+2025-05-18 23:22:52 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:22:52 info: Database cleanup logic will be implemented here.
+2025-05-18 23:22:52 info: Starting Nexus Bot initialization...
+2025-05-18 23:22:52 info: Error tracking system initialized
+2025-05-18 23:22:52 info: Memory monitoring started
+2025-05-18 23:22:53 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:22:53 info: Permissions tables initialized
+2025-05-18 23:22:53 info: Database initialized successfully
+2025-05-18 23:22:53 info: Initializing permission manager...
+2025-05-18 23:22:53 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:22:53 info: Permission manager initialized successfully
+2025-05-18 23:22:53 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:22:53 info: Permissions tables initialized
+2025-05-18 23:22:53 info: Database initialized successfully
+2025-05-18 23:22:53 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:22:53 info: No migration needed - using database
+2025-05-18 23:22:53 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:22:53 info: Loaded 0 custom keywords from database
+2025-05-18 23:22:53 info: Loaded command: admin [admin]
+2025-05-18 23:22:53 info: Loaded command: allout [admin]
+2025-05-18 23:22:53 info: Loaded command: analytics [admin]
+2025-05-18 23:22:53 info: Loaded command: stdl [utility]
+2025-05-18 23:22:53 info: Loaded command: errors [admin]
+2025-05-18 23:22:53 info: Loaded command: eval [admin]
+2025-05-18 23:22:53 info: Loaded command: feature-toggle [system]
+2025-05-18 23:22:53 info: Loaded command: help [system]
+2025-05-18 23:22:53 info: Loaded command: keyword [system]
+2025-05-18 23:22:53 info: Loaded command: ping [info]
+2025-05-18 23:22:53 info: Loaded command: prefix [system]
+2025-05-18 23:22:53 info: Loaded command: reload [admin]
+2025-05-18 23:22:53 info: Loaded command: restart [admin]
+2025-05-18 23:22:53 info: Loaded command: resync [admin]
+2025-05-18 23:22:53 info: Loaded command: say [utility]
+2025-05-18 23:22:53 info: Loaded command: stats [admin]
+2025-05-18 23:22:53 info: Loaded command: thread [admin]
+2025-05-18 23:22:53 info: Loaded command: update [admin]
+2025-05-18 23:22:53 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:22:53 info: Loaded event: adminNoti
+2025-05-18 23:22:53 info: Loaded event: autoUptime
+2025-05-18 23:22:53 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:22:53 info: Loaded event: groupEvent
+2025-05-18 23:22:53 info: Loaded event: introMessage
+2025-05-18 23:22:53 info: Loaded event: messageEvent
+2025-05-18 23:22:53 info: Loaded event: ready
+2025-05-18 23:22:53 info: Initializing permission manager...
+2025-05-18 23:22:53 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:22:53 info: Permission manager initialized successfully
+2025-05-18 23:22:53 info: Loaded AppState successfully
+2025-05-18 23:25:13 info: Database cleanup logic will be implemented here.
+2025-05-18 23:25:13 info: Database cleanup logic will be implemented here.
+2025-05-18 23:25:13 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:25:13 info: Database cleanup logic will be implemented here.
+2025-05-18 23:25:13 info: Starting Nexus Bot initialization...
+2025-05-18 23:25:13 info: Error tracking system initialized
+2025-05-18 23:25:13 info: Memory monitoring started
+2025-05-18 23:25:13 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:25:13 info: Permissions tables initialized
+2025-05-18 23:25:13 info: Database initialized successfully
+2025-05-18 23:25:13 info: Initializing permission manager...
+2025-05-18 23:25:13 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:25:13 info: Permission manager initialized successfully
+2025-05-18 23:25:13 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:25:13 info: Permissions tables initialized
+2025-05-18 23:25:13 info: Database initialized successfully
+2025-05-18 23:25:13 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:25:13 info: No migration needed - using database
+2025-05-18 23:25:13 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:25:13 info: Loaded 0 custom keywords from database
+2025-05-18 23:25:13 info: Loaded command: admin [admin]
+2025-05-18 23:25:13 info: Loaded command: allout [admin]
+2025-05-18 23:25:13 info: Loaded command: analytics [admin]
+2025-05-18 23:25:13 info: Loaded command: stdl [utility]
+2025-05-18 23:25:13 info: Loaded command: errors [admin]
+2025-05-18 23:25:13 info: Loaded command: eval [admin]
+2025-05-18 23:25:13 info: Loaded command: feature-toggle [system]
+2025-05-18 23:25:13 info: Loaded command: help [system]
+2025-05-18 23:25:13 info: Loaded command: keyword [system]
+2025-05-18 23:25:13 info: Loaded command: ping [info]
+2025-05-18 23:25:13 info: Loaded command: prefix [system]
+2025-05-18 23:25:13 info: Loaded command: reload [admin]
+2025-05-18 23:25:13 info: Loaded command: restart [admin]
+2025-05-18 23:25:13 info: Loaded command: resync [admin]
+2025-05-18 23:25:13 info: Loaded command: say [utility]
+2025-05-18 23:25:13 info: Loaded command: stats [admin]
+2025-05-18 23:25:13 info: Loaded command: thread [admin]
+2025-05-18 23:25:13 info: Loaded command: update [admin]
+2025-05-18 23:25:13 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:25:13 info: Loaded event: adminNoti
+2025-05-18 23:25:13 info: Loaded event: autoUptime
+2025-05-18 23:25:13 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:25:13 info: Loaded event: groupEvent
+2025-05-18 23:25:13 info: Loaded event: introMessage
+2025-05-18 23:25:13 info: Loaded event: messageEvent
+2025-05-18 23:25:13 info: Loaded event: ready
+2025-05-18 23:25:13 info: Initializing permission manager...
+2025-05-18 23:25:13 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:25:13 info: Permission manager initialized successfully
+2025-05-18 23:25:13 info: Loaded AppState successfully
+2025-05-18 23:28:06 info: Database cleanup logic will be implemented here.
+2025-05-18 23:28:06 info: Database cleanup logic will be implemented here.
+2025-05-18 23:28:06 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:28:06 info: Database cleanup logic will be implemented here.
+2025-05-18 23:28:06 info: Starting Nexus Bot initialization...
+2025-05-18 23:28:06 info: Error tracking system initialized
+2025-05-18 23:28:06 info: Memory monitoring started
+2025-05-18 23:28:06 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:28:06 info: Permissions tables initialized
+2025-05-18 23:28:06 info: Database initialized successfully
+2025-05-18 23:28:06 info: Initializing permission manager...
+2025-05-18 23:28:07 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:28:07 info: Permission manager initialized successfully
+2025-05-18 23:28:07 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:28:07 info: Permissions tables initialized
+2025-05-18 23:28:07 info: Database initialized successfully
+2025-05-18 23:28:07 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:28:07 info: No migration needed - using database
+2025-05-18 23:28:07 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:28:07 info: Loaded 0 custom keywords from database
+2025-05-18 23:28:07 info: Loaded command: admin [admin]
+2025-05-18 23:28:07 info: Loaded command: allout [admin]
+2025-05-18 23:28:07 info: Loaded command: analytics [admin]
+2025-05-18 23:28:07 info: Loaded command: stdl [utility]
+2025-05-18 23:28:07 info: Loaded command: errors [admin]
+2025-05-18 23:28:07 info: Loaded command: eval [admin]
+2025-05-18 23:28:07 info: Loaded command: feature-toggle [system]
+2025-05-18 23:28:07 info: Loaded command: help [system]
+2025-05-18 23:28:07 info: Loaded command: keyword [system]
+2025-05-18 23:28:07 info: Loaded command: ping [info]
+2025-05-18 23:28:07 info: Loaded command: prefix [system]
+2025-05-18 23:28:07 info: Loaded command: reload [admin]
+2025-05-18 23:28:07 info: Loaded command: restart [admin]
+2025-05-18 23:28:07 info: Loaded command: resync [admin]
+2025-05-18 23:28:07 info: Loaded command: say [utility]
+2025-05-18 23:28:07 info: Loaded command: stats [admin]
+2025-05-18 23:28:07 info: Loaded command: thread [admin]
+2025-05-18 23:28:07 info: Loaded command: update [admin]
+2025-05-18 23:28:07 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:28:07 info: Loaded event: adminNoti
+2025-05-18 23:28:07 info: Loaded event: autoUptime
+2025-05-18 23:28:07 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:28:07 info: Loaded event: groupEvent
+2025-05-18 23:28:07 info: Loaded event: introMessage
+2025-05-18 23:28:07 info: Loaded event: messageEvent
+2025-05-18 23:28:07 info: Loaded event: ready
+2025-05-18 23:28:07 info: Initializing permission manager...
+2025-05-18 23:28:07 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:28:07 info: Permission manager initialized successfully
+2025-05-18 23:28:07 info: Loaded AppState successfully
+2025-05-18 23:30:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:30:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:30:39 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:30:39 info: Database cleanup logic will be implemented here.
+2025-05-18 23:30:39 info: Starting Nexus Bot initialization...
+2025-05-18 23:30:39 info: Error tracking system initialized
+2025-05-18 23:30:39 info: Memory monitoring started
+2025-05-18 23:30:39 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:30:39 info: Permissions tables initialized
+2025-05-18 23:30:39 info: Database initialized successfully
+2025-05-18 23:30:39 info: Initializing permission manager...
+2025-05-18 23:30:39 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:30:39 info: Permission manager initialized successfully
+2025-05-18 23:30:39 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:30:39 info: Permissions tables initialized
+2025-05-18 23:30:39 info: Database initialized successfully
+2025-05-18 23:30:39 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:30:39 info: No migration needed - using database
+2025-05-18 23:30:39 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:30:39 info: Loaded 0 custom keywords from database
+2025-05-18 23:30:39 info: Loaded command: admin [admin]
+2025-05-18 23:30:39 info: Loaded command: allout [admin]
+2025-05-18 23:30:39 info: Loaded command: analytics [admin]
+2025-05-18 23:30:39 info: Loaded command: stdl [utility]
+2025-05-18 23:30:39 info: Loaded command: errors [admin]
+2025-05-18 23:30:39 info: Loaded command: eval [admin]
+2025-05-18 23:30:39 info: Loaded command: feature-toggle [system]
+2025-05-18 23:30:39 info: Loaded command: help [system]
+2025-05-18 23:30:39 info: Loaded command: keyword [system]
+2025-05-18 23:30:39 info: Loaded command: ping [info]
+2025-05-18 23:30:39 info: Loaded command: prefix [system]
+2025-05-18 23:30:39 info: Loaded command: reload [admin]
+2025-05-18 23:30:39 info: Loaded command: restart [admin]
+2025-05-18 23:30:39 info: Loaded command: resync [admin]
+2025-05-18 23:30:39 info: Loaded command: say [utility]
+2025-05-18 23:30:39 info: Loaded command: stats [admin]
+2025-05-18 23:30:39 info: Loaded command: thread [admin]
+2025-05-18 23:30:39 info: Loaded command: update [admin]
+2025-05-18 23:30:39 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:30:39 info: Loaded event: adminNoti
+2025-05-18 23:30:39 info: Loaded event: autoUptime
+2025-05-18 23:30:39 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:30:39 info: Loaded event: groupEvent
+2025-05-18 23:30:39 info: Loaded event: introMessage
+2025-05-18 23:30:39 info: Loaded event: messageEvent
+2025-05-18 23:30:39 info: Loaded event: ready
+2025-05-18 23:30:39 info: Initializing permission manager...
+2025-05-18 23:30:39 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:30:39 info: Permission manager initialized successfully
+2025-05-18 23:30:39 info: Loaded AppState successfully
+2025-05-18 23:31:37 info: 📝 Detected changes in: ping.js
+2025-05-18 23:31:37 info: 🔄 Reloaded command: ping
+2025-05-18 23:31:37 info: Admin message: 🔄 Command "ping" has been updated and reloaded successfully.
+2025-05-18 23:31:39 error: Failed to notify admin 100036117980682: Unknown error
+2025-05-18 23:32:55 info: 📝 Detected changes in: restart.js
+2025-05-18 23:32:55 info: 🔄 Reloaded command: restart
+2025-05-18 23:32:55 info: Admin message: 🔄 Command "restart" has been updated and reloaded successfully.
+2025-05-18 23:32:56 error: Failed to notify admin 100036117980682: Unknown error
+2025-05-18 23:32:57 info: 📝 Detected changes in: update.js
+2025-05-18 23:32:57 info: 🔄 Reloaded command: update
+2025-05-18 23:32:57 info: Admin message: 🔄 Command "update" has been updated and reloaded successfully.
+2025-05-18 23:32:57 info: 📝 Detected changes in: download.js
+2025-05-18 23:32:57 info: 🔄 Reloaded command: stdl
+2025-05-18 23:32:57 info: Admin message: 🔄 Command "stdl" has been updated and reloaded successfully.
+2025-05-18 23:32:57 error: Failed to notify admin 100036117980682: Unknown error
+2025-05-18 23:32:57 error: Failed to notify admin 100036117980682: Unknown error
+2025-05-18 23:38:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:38:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:38:51 info: Database initialization skipped as Prisma usage is removed
+2025-05-18 23:38:51 info: Database cleanup logic will be implemented here.
+2025-05-18 23:38:51 info: Starting Nexus Bot initialization...
+2025-05-18 23:38:51 info: Error tracking system initialized
+2025-05-18 23:38:51 info: Memory monitoring started
+2025-05-18 23:38:51 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:38:51 info: Permissions tables initialized
+2025-05-18 23:38:51 info: Database initialized successfully
+2025-05-18 23:38:52 info: Initializing permission manager...
+2025-05-18 23:38:52 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:38:52 info: Permission manager initialized successfully
+2025-05-18 23:38:52 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:38:52 info: Permissions tables initialized
+2025-05-18 23:38:52 info: Database initialized successfully
+2025-05-18 23:38:52 info: Connected to SQLite database at C:\Users\Administrator\Desktop\Nexus\database\data.db
+2025-05-18 23:38:52 info: No migration needed - using database
+2025-05-18 23:38:52 info: Loaded 0 custom thread prefixes from database
+2025-05-18 23:38:52 info: Loaded 0 custom keywords from database
+2025-05-18 23:38:52 info: Loaded command: admin [admin]
+2025-05-18 23:38:52 info: Loaded command: allout [admin]
+2025-05-18 23:38:52 info: Loaded command: analytics [admin]
+2025-05-18 23:38:52 info: Loaded command: stdl [utility]
+2025-05-18 23:38:52 info: Loaded command: errors [admin]
+2025-05-18 23:38:52 info: Loaded command: eval [admin]
+2025-05-18 23:38:52 info: Loaded command: feature-toggle [system]
+2025-05-18 23:38:52 info: Loaded command: help [system]
+2025-05-18 23:38:52 info: Loaded command: keyword [system]
+2025-05-18 23:38:52 info: Loaded command: ping [info]
+2025-05-18 23:38:52 info: Loaded command: prefix [system]
+2025-05-18 23:38:52 info: Loaded command: reload [admin]
+2025-05-18 23:38:52 info: Loaded command: restart [admin]
+2025-05-18 23:38:52 info: Loaded command: resync [admin]
+2025-05-18 23:38:52 info: Loaded command: say [utility]
+2025-05-18 23:38:52 info: Loaded command: stats [admin]
+2025-05-18 23:38:52 info: Loaded command: thread [admin]
+2025-05-18 23:38:52 info: Loaded command: update [admin]
+2025-05-18 23:38:52 info: 👀 Watching for changes in: C:\Users\Administrator\Desktop\Nexus\commands
+2025-05-18 23:38:52 info: Loaded event: adminNoti
+2025-05-18 23:38:52 info: Loaded event: autoUptime
+2025-05-18 23:38:52 info: Loaded event: exampleAdvancedEvent
+2025-05-18 23:38:52 info: Loaded event: groupEvent
+2025-05-18 23:38:52 info: Loaded event: introMessage
+2025-05-18 23:38:52 info: Loaded event: messageEvent
+2025-05-18 23:38:52 info: Loaded event: ready
+2025-05-18 23:38:52 info: Initializing permission manager...
+2025-05-18 23:38:52 info: Loaded permissions for 1 users and 0 threads
+2025-05-18 23:38:52 info: Permission manager initialized successfully
+2025-05-18 23:38:52 info: Loaded AppState successfully
+2025-05-18 23:39:03 info: 📝 Detected changes in: ping.js
+2025-05-18 23:39:03 info: 🔄 Reloaded command: ping
+2025-05-18 23:39:03 info: Admin message: 🔄 Command "ping" has been updated and reloaded successfully.
+2025-05-18 23:39:04 error: Failed to notify admin 100036117980682: Unknown error
+2025-05-18 23:39:16 info: 📝 Detected changes in: ping.js
+2025-05-18 23:39:16 info: 🔄 Reloaded command: ping
+2025-05-18 23:39:16 info: Admin message: 🔄 Command "ping" has been updated and reloaded successfully.
+2025-05-18 23:39:17 error: Failed to notify admin 100036117980682: Unknown error

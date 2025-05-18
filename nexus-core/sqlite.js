@@ -1,7 +1,7 @@
 // Simple SQLite wrapper using sqlite3
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const DB_PATH = path.join(process.cwd(), 'database', 'data.sqlite');
+const DB_PATH = path.join(process.cwd(), 'database', 'data.db');
 
 function getDb() {
   return new sqlite3.Database(DB_PATH);
