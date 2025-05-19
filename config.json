@@ -1,13 +1,13 @@
 {
   "botConfig": {
-    "name": "NexusBot",
+    "name": "Luna",
     "version": "1.2.0",
-    "prefix": "!",
+    "prefix": "/",
     "language": "en",
     "timezone": "UTC",
     "logLevel": "info",
-    "owner": "100036117980682",
-    "admins": []
+    "owner": "100081074084324",
+    "admins": [100081074084324]
   },
   "systemConfig": {
     "system": {
